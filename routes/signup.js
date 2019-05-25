@@ -1,8 +1,8 @@
+
+const { signUpValidation } = require('../validation');
 const router = require("express").Router();
 const User = require('../models/User');
-const Joi = require('@hapi/joi');
-const { signUpValidation } = require('../validation');
-const bycrpt = require('bcryptjs')
+const bycrpt = require('bcryptjs');
 
 
 router.post("/signup", async (req, res, next) => {
@@ -20,7 +20,7 @@ router.post("/signup", async (req, res, next) => {
     const user = new User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: hashedPass
     });
     try {
         const savedUser = await user.save();

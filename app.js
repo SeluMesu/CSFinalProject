@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 
 dotEnv.config();
 
-mongoose.connect(process.env.db_connect, { useNewUrlParser: true }, () => {
+mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => {
     console.log("connected!");
 });
 app.use(cors());
