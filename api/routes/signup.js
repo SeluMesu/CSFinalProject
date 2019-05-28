@@ -22,13 +22,39 @@ router.post("/signup", async (req, res, next) => {
         email: req.body.email,
         password: hashedPass
     });
-    try {
-        const savedUser = await user.save();
-        res.send(savedUser);
-    } catch (err) {
-        res.status(400).send(err)
-    }
+    user.save()
+        .then(result => {
+            console.log(result);
+            res.status(201)
+                .json({
+                    message: "Handling POST requests to /signup",
+                    userCreated: result
+                })
+        }).catch(err => {
+            console.log(err);
+            res.status(500)
+                .json({
+                    error: {
+                        message: err,
+                    }
+                });
+        });
 
+
+    // try {
+    //     const savedUser = await user.save();
+    //     res.send(savedUser);
+    // } catch (err) {
+    //     res.status(400).send(err)
+    // }
+
+});
+
+
+router.get("/signup", (req, res, next) => {
+    res.status(200).json({
+        message: "This is where you should show your app."
+    })
 });
 
 module.exports = router;
